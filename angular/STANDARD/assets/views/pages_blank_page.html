@@ -1,0 +1,81 @@
+<!-- start: BREADCRUMB -->
+<div class="breadcrumb-wrapper">
+    <h4 class="mainTitle no-margin" translate="sidebar.nav.pages.BLANKPAGE">STARTER PAGE</h4>
+
+    <div ncy-breadcrumb class="pull-right"></div>
+</div>
+<!-- end: BREADCRUMB -->
+<!-- start: YOUR CONTENT HERE -->
+<div class="container-fluid container-fullw">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-white">
+                <div class="panel-body">
+                    <h5 class="over-title margin-bottom-15">Search <span class="text-bold">Form</span></h5>
+                    <div class="row">
+                        <div class="col-lg-7 col-sm-6">
+                            <div class="panel panel-transparent">
+                                <div class="panel-body">
+                                    <form role="form" class="form-horizontal">
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label" for="topic">
+                                                Topic
+                                            </label>
+                                            <div class="col-sm-10">
+                                                <input type="text" name="topic" class="form-control" placeholder="Enter topic(s)">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label" for="hashtag">
+                                                Hashtag
+                                            </label>
+                                            <div class="col-sm-10">
+                                                <input type="text" name="hashtag" class="form-control" placeholder="Enter hashtag(s)">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-sm-offset-2 col-sm-10">
+                                                <div class="checkbox clip-check check-primary">
+                                                    <input type="checkbox" id="checkbox2" value="1">
+                                                    <label for="checkbox2">
+                                                        Geo-enabled
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div ng-controller="DateRangeCtrl">
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label" for="daterange1">
+                                                    Dates
+                                                </label>
+                                                <div class="col-sm-10">
+                                                    <input type="daterange" class="form-control" ng-model="dates" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label" for="sentiment">
+                                                Sentiment(%)
+                                            </label>
+                                            <div class="col-sm-10">
+                                                <input id="sentiment" type="text" value="55" name="sentiment" touchspin data-min="0" data-max="100" data-step="1.0" data-decimals="2" data-boostat="5" data-maxboostedstep="10" data-postfix="%">
+                                            </div>
+                                        </div>
+                                        <div class="form-group margin-bottom-0">
+                                            <div class="col-sm-offset-2 col-sm-10">
+                                                <button class="btn btn-o btn-primary" type="submit">
+                                                    Search
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end: YOUR CONTENT HERE -->
