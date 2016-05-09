@@ -189,33 +189,33 @@ app.controller('TwitterCtrl', ["$scope",
 ]);
 
 app.controller('LangCtrl', ["$scope",
-                               function ($scope) {
-                                 $scope.labels = [];
-                                 $scope.colors = ['#F7464A', '#46BFBD', '#FDB45C', '#5AA440', '#FBCA04'];
-                                 var root = 'http://115.146.95.99:5984/tweets/_design/statistics/_list/top_n_list/lang_view?n=5&group=true';
-                                 var all = [];
-                                 $.ajax({
-                                   url: root,
-                                   method: 'GET'
-                                 }).then(function (data) {
-                                   data.rows.forEach(function (item) {
-                                     $scope.labels.push(item.key);
-                                     all.push(item.value);
-                                   });
-                                 });
-                                 $scope.data = all;
-                                 $scope.options = {
-                                   responsive: false,
-                                   segmentShowStroke: true,
-                                   segmentStrokeColor: '#fff',
-                                   segmentStrokeWidth: 2,
-                                   percentageInnerCutout: 0, // This is 0 for Pie charts
-                                   animationSteps: 100,
-                                   animationEasing: 'easeOutBounce',
-                                   animateRotate: true,
-                                   animateScale: false
-                                 };
-                               }
+                            function ($scope) {
+                              $scope.labels = [];
+                              $scope.colors = ['#F7464A', '#46BFBD', '#FDB45C', '#5AA440', '#FBCA04'];
+                              var root = 'http://115.146.95.99:5984/tweets/_design/statistics/_list/top_n_list/lang_view?n=5&group=true';
+                              var all = [];
+                              $.ajax({
+                                url: root,
+                                method: 'GET'
+                              }).then(function (data) {
+                                data.rows.forEach(function (item) {
+                                  $scope.labels.push(item.key);
+                                  all.push(item.value);
+                                });
+                              });
+                              $scope.data = all;
+                              $scope.options = {
+                                responsive: false,
+                                segmentShowStroke: true,
+                                segmentStrokeColor: '#fff',
+                                segmentStrokeWidth: 2,
+                                percentageInnerCutout: 0, // This is 0 for Pie charts
+                                animationSteps: 100,
+                                animationEasing: 'easeOutBounce',
+                                animateRotate: true,
+                                animateScale: false
+                              };
+                            }
 ]);
 
 app.controller('UserIdCtrl', ["$scope",
@@ -249,44 +249,69 @@ app.controller('UserIdCtrl', ["$scope",
 ]);
 
 
-//app.controller('NHappiestSuburbsCtrl', ["$scope",
-//                              function ($scope) {
-//                                $scope.labels = [];
-//                                $scope.colors = ['#F7464A', '#46BFBD', '#FDB45C', '#5AA440', '#FBCA04'];
-//                                var root = 'http://115.146.95.99:5984/yasmeen-test-tweets/_design/sentiment-analysis/_view/places_tweets?group=true&group_level=2';
-//                                var all = [], positives = [], n =5;
-//                                $.ajax({
-//                                  url: root,
-//                                  method: 'GET'
-//                                }).then(function (response) {
-//                                  var data = JSON.parse(response);
-//                                  data.rows.forEach(function (item) {
-//                                    if (item.key[1] == 'positive') {
-//                                      positives.push({
-//                                        "key": item.key[0],
-//                                        "sum": item.value.sum
-//                                      });
-//                                    }
-//                                  });
-//                                  positives.sort(function(a, b) {
-//                                    return b.sum - a.sum;
-//                                  });
-//                                  positives.splice(0, n);
-//                                });
-//                                $scope.data = all;
-//                                $scope.options = {
-//                                  responsive: false,
-//                                  segmentShowStroke: true,
-//                                  segmentStrokeColor: '#fff',
-//                                  segmentStrokeWidth: 2,
-//                                  percentageInnerCutout: 0, // This is 0 for Pie charts
-//                                  animationSteps: 100,
-//                                  animationEasing: 'easeOutBounce',
-//                                  animateRotate: true,
-//                                  animateScale: false
-//                                };
-//                              }
-//]);
+app.controller('NHappiestSuburbsCtrl', ["$scope",
+                                        function ($scope) {
+                                          $scope.labels_top = [];
+                                          $scope.labels_bottom = [];
+                                          $scope.colors = ['#F7464A', '#46BFBD', '#FDB45C', '#5AA440', '#FBCA04'];
+                                          var root = 'http://115.146.95.99:5984/yasmeen-test-tweets/_design/sentiment-analysis/_view/places_tweets?group=true&group_level=2';
+                                          var all_top = [], all_bottom = [], positives = [], negatives = [] , n = 5;
+                                          $.ajax({
+                                            url: root,
+                                            method: 'GET'
+                                          }).then(function (response) {
+                                            var data = JSON.parse(response);
+                                            data.rows.forEach(function (item) {
+                                              if (item.key[1] == 'positive') {
+                                                positives.push({
+                                                  "key": item.key[0],
+                                                  "sum": item.value.sum,
+                                                  "count": item.value.count
+                                                });
+                                              }
+                                              if (item.key[1] == 'negative') {
+                                                negatives.push({
+                                                  "key": item.key[0],
+                                                  "sum": item.value.sum,
+                                                  "count": item.value.count
+                                                });
+                                              }
+                                            });
+
+                                            positives.sort(function (a, b) {
+                                              return (b.sum / b.count) - (a.sum / a.count);
+                                            });
+                                            var top5 = positives.splice(0, n);
+                                            top5.forEach(function (item) {
+                                              $scope.labels_top.push(item.key);
+                                              all_top.push(item.sum / item.count);
+                                            });
+
+                                            negatives.sort(function (a, b) {
+                                              return (b.sum / b.count) - (a.sum / a.count);
+                                            });
+                                            var bottom5 = (negatives.slice(Math.max(negatives.length - n, 1))).reverse();
+                                            bottom5.forEach(function (item) {
+                                              $scope.labels_bottom.push(item.key);
+                                              all_bottom.push(item.sum / item.count);
+                                            });
+
+                                          });
+                                          $scope.data_top = all_top;
+                                          $scope.data_bottom = all_bottom;
+                                          $scope.options = {
+                                            responsive: false,
+                                            segmentShowStroke: true,
+                                            segmentStrokeColor: '#fff',
+                                            segmentStrokeWidth: 2,
+                                            percentageInnerCutout: 0, // This is 0 for Pie charts
+                                            animationSteps: 100,
+                                            animationEasing: 'easeOutBounce',
+                                            animateRotate: true,
+                                            animateScale: false
+                                          };
+                                        }
+]);
 
 app.controller('ChartCtrl3', ["$scope",
                               function ($scope) {
