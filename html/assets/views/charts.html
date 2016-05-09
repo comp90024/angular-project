@@ -30,7 +30,33 @@
 </div>
 <!-- end: Sentiment Analysis-->
 
-<!-- start: Top Mentioned topics and twitters-->
+
+<!-- start: Top 5 Languages and UserId-->
+<div class="container-fluid container-fullw">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="panel panel-white">
+                <div class="panel-body">
+                    <div class="row">
+                        <div>
+                            <div class="col-sm-6" ng-controller="LangCtrl">
+                                <h5 class="over-title margin-bottom-15">Top 5 Languages<span class="text-bold"> in Melbourne Region</span></h5>
+                                <canvas class="chart chart-doughnut" chart-data="data" chart-options="options" chart-labels="labels" chart-series="series" chart-colours="colors" chart-legend="true"></canvas>
+                            </div>
+                            <div class="col-sm-6" ng-controller="UserIdCtrl">
+                                <h5 class="over-title margin-bottom-15">Top 5 User Ids<span class="text-bold"> in Melbourne Region</span></h5>
+                                <canvas class="chart chart-doughnut" chart-data="data" chart-options="options" chart-labels="labels" chart-series="series" chart-colours="colors" chart-legend="true"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end: Top 5 Languages and UserId-->
+
+<!-- start: Top 5 Mentioned topics and twitters-->
 <div class="container-fluid container-fullw">
     <div class="row">
         <div class="col-sm-12">
@@ -54,32 +80,5 @@
     </div>
 </div>
 <!-- end: Top Mentioned topics and twitters-->
-
-<!-- start: Top Mentioned topics and twitters-->
-<div class="container-fluid container-fullw">
-    <div class="row">
-        <div class="col-sm-12">
-            <div class="panel panel-white">
-                <div class="panel-body">
-                    <div class="row">
-                        <div>
-                            <div class="col-sm-6" ng-controller="LangCtrl">
-                                <h5 class="over-title margin-bottom-15">Top 5 Languages<span class="text-bold"> in Melbourne Region</span></h5>
-                                <canvas class="chart chart-doughnut" chart-data="data" chart-options="options" chart-labels="labels" chart-series="series" chart-colours="colors" chart-legend="true"></canvas>
-                            </div>
-                            <div class="col-sm-6" ng-controller="UserIdCtrl">
-                                <h5 class="over-title margin-bottom-15">Top 5 User Ids<span class="text-bold"> in Melbourne Region</span></h5>
-                                <canvas class="chart chart-doughnut" chart-data="data" chart-options="options" chart-labels="labels" chart-series="series" chart-colours="colors" chart-legend="true"></canvas>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- end: Top Mentioned topics and twitters-->
-
-
 
 
