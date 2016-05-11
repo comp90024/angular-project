@@ -254,7 +254,7 @@ app.controller('NHappiestSuburbsCtrl', ["$scope",
                                           $scope.labels_top = [];
                                           $scope.labels_bottom = [];
                                           $scope.colors = ['#F7464A', '#46BFBD', '#FDB45C', '#5AA440', '#FBCA04'];
-                                          var root = 'http://115.146.95.99:5984/yasmeen-test-tweets/_design/sentiment-analysis/_view/places_tweets?group=true&group_level=2';
+                                          var root = 'http://115.146.95.99:5984/yasmeen-test-tweets/_design/sentiment-analysis/_view/places_tweets?group=true&group_level=3';
                                           var all_top = [], all_bottom = [], positives = [], negatives = [] , n = 5;
                                           $.ajax({
                                             url: root,
@@ -264,14 +264,14 @@ app.controller('NHappiestSuburbsCtrl', ["$scope",
                                             data.rows.forEach(function (item) {
                                               if (item.key[1] == 'positive') {
                                                 positives.push({
-                                                  "key": item.key[0],
+                                                  "key": item.key[2],
                                                   "sum": item.value.sum,
                                                   "count": item.value.count
                                                 });
                                               }
                                               if (item.key[1] == 'negative') {
                                                 negatives.push({
-                                                  "key": item.key[0],
+                                                  "key": item.key[2],
                                                   "sum": item.value.sum,
                                                   "count": item.value.count
                                                 });
